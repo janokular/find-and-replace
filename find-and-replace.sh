@@ -9,8 +9,7 @@ usage() {
 
 # If user doesn't supply three arguments, then give them help
 NUMBER_OF_PARAMETERS="${#}"
-if [[ "${NUMBER_OF_PARAMETERS}" -ne 3 ]]
-then
+if [[ "${NUMBER_OF_PARAMETERS}" -ne 3 ]]; then
   usage
 fi
 
