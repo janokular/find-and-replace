@@ -8,29 +8,29 @@ usage() {
 }
 
 # If user doesn't supply three arguments, then give them help
-NUMBER_OF_PARAMETERS="${#}"
-if [[ "${NUMBER_OF_PARAMETERS}" -ne 3 ]]; then
+number_of_params="${#}"
+if [[ "${number_of_params}" -ne 3 ]]; then
   usage
 fi
 
-FIND="${1}"
-REPLACE="${2}"
-DIR="${3}"
+find="${1}"
+replace="${2}"
+dir="${3}"
 
-# Check if $DIR exists
-if [[ ! -d "${DIR}" ]]; then
-  echo "${DIR} does not exist" >&2
+# Check if $dir exists
+if [[ ! -d "${dir}" ]]; then
+  echo "${dir} does not exist" >&2
   exit 1
 fi
 
 # Recursivly search for files containing find string
-grep -rl "${FIND}" "${DIR}" | while read -r FILE; do
-  sed -i -e "s/${FIND}/${REPLACE}/g" "${FILE}"
+grep -rl "${find}" "${dir}" | while read -r FILE; do
+  sed -i -e "s/${find}/${replace}/g" "${FILE}"
 
   # Check if string was successfully replaced
   if [[ "${?}" -ne 0 ]]; then
-    echo "Could not replace string '${FIND}' with '${REPLACE}' in ${FILE}" >&2
+    echo "Could not replace string '${find}' with '${replace}' in ${FILE}" >&2
   else
-    echo "Successfully replaced string '${FIND}' with '${REPLACE}' in ${FILE}"
+    echo "Successfully replaced string '${find}' with '${replace}' in ${FILE}"
   fi
 done
